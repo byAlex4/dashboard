@@ -41,7 +41,9 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             color: var(--dark);
             line-height: 1.6;
             padding: 20px;
-            min-height: 100vh;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
         }
 
         .container {
@@ -52,7 +54,7 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
         header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 20px 0;
+            padding-bottom: 20px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
@@ -81,6 +83,9 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             padding: 25px;
             transition: var(--transition);
             border-left: 4px solid var(--primary);
+            height: fit-content;
+            max-height: 70vh;
+            width: fit-content;
         }
 
         .card:hover {
@@ -119,16 +124,15 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
 
         .item-list {
             list-style: none;
-        }
-
-        .item-list li {
-            margin-bottom: 12px;
+            max-height: 59vh;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .item-list a {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             padding: 12px 15px;
             background: rgba(67, 97, 238, 0.05);
             border-radius: 8px;
@@ -136,6 +140,7 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             color: var(--dark);
             transition: var(--transition);
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .item-list a:hover {
@@ -158,6 +163,26 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             color: var(--success);
         }
 
+        .item-list.projects {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            max-height: 59vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .item-list.projects li {
+            margin-bottom: 0;
+            /* Eliminamos el margin-bottom ya que usamos gap */
+        }
+
+        .item-list.projects a {
+            min-height: 50px;
+            /* Altura mínima consistente */
+            height: 100%;
+        }
+
         .footer {
             text-align: center;
             margin-top: 50px;
@@ -171,7 +196,7 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             .dashboard {
                 grid-template-columns: 1fr;
             }
-            
+
             h1 {
                 font-size: 2rem;
             }
@@ -190,8 +215,10 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             <div class="card card-tools">
                 <h2><i class="fas fa-tools"></i> Herramientas del Sistema</h2>
                 <ul class="item-list tools">
-                    <li><a href="/dashboard/phpinfo.php" target="_blank"><i class="fas fa-info-circle"></i> PHP Info</a></li>
-                    <li><a href="http://localhost/phpmyadmin" target="_blank"><i class="fas fa-database"></i> phpMyAdmin</a></li>
+                    <li><a href="/dashboard/phpinfo.php" target="_blank"><i class="fas fa-info-circle"></i> PHP Info</a>
+                    </li>
+                    <li><a href="http://localhost/phpmyadmin" target="_blank"><i class="fas fa-database"></i>
+                            phpMyAdmin</a></li>
                 </ul>
             </div>
 
@@ -199,7 +226,8 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
                 <h2><i class="fas fa-folder-open"></i> Proyectos en htdocs</h2>
                 <ul class="item-list projects">
                     <?php foreach ($projects as $project): ?>
-                        <li><a href="/<?= htmlspecialchars($project) ?>" target="_blank"><i class="fas fa-folder"></i> <?= htmlspecialchars($project) ?></a></li>
+                        <li><a href="/<?= htmlspecialchars($project) ?>" target="_blank"><i class="fas fa-folder"></i>
+                                <?= htmlspecialchars($project) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
