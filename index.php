@@ -1,6 +1,6 @@
 <?php
 $htdocsPath = realpath(__DIR__ . '/../'); // Subir desde /dashboard a /htdocs
-$excluded = ['dashboard', '.', '..', '.DS_Store', 'webalizer', 'img'];
+$excluded = ['dashboard', '.', '..', '.DS_Store', 'webalizer', 'img', 'descartados', 'backups'];
 
 $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath, $excluded) {
     return is_dir($htdocsPath . '/' . $item) && !in_array($item, $excluded);
@@ -16,15 +16,15 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
+            --primary: #5b75e9ff;
             --primary-dark: #3a56d4;
             --secondary: #7209b7;
             --success: #4cc9f0;
             --light: #f8f9fa;
             --dark: #212529;
             --gray: #6c757d;
-            --card-bg: #ffffff;
-            --body-bg: #f0f2f5;
+            --card-bg: #ffffff20;
+            --body-bg: #010249ff;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
@@ -107,7 +107,7 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             gap: 10px;
             font-size: 1.4rem;
             margin-bottom: 20px;
-            color: var(--dark);
+            color: var(--light);
         }
 
         .card h2 i {
@@ -134,10 +134,10 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             align-items: center;
             gap: 15px;
             padding: 12px 15px;
-            background: rgba(67, 97, 238, 0.05);
+            background: rgba(94, 111, 185, 0.46);
             border-radius: 8px;
             text-decoration: none;
-            color: var(--dark);
+            color: var(--light);
             transition: var(--transition);
             font-weight: 500;
             white-space: nowrap;
@@ -153,6 +153,10 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             width: 20px;
             text-align: center;
             color: var(--primary);
+        }
+
+        .item-list .tools {
+            margin-bottom: 12px;
         }
 
         .item-list .tools a i {
@@ -215,7 +219,7 @@ $projects = array_filter(scandir($htdocsPath), function ($item) use ($htdocsPath
             <div class="card card-tools">
                 <h2><i class="fas fa-tools"></i> Herramientas del Sistema</h2>
                 <ul class="item-list tools">
-                    <li><a href="/dashboard/phpinfo.php" target="_blank"><i class="fas fa-info-circle"></i> PHP Info</a>
+                    <li style="margin-bottom: 12px;"><a href="/dashboard/phpinfo.php" target="_blank"><i class="fas fa-info-circle"></i> PHP Info</a>
                     </li>
                     <li><a href="http://localhost/phpmyadmin" target="_blank"><i class="fas fa-database"></i>
                             phpMyAdmin</a></li>
